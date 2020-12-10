@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BwtCompression.Cli": {
+      "commandName": "Project",
+      "commandLineArgs": "e ..\\..\\..\\..\\TestFiles\\bib"
+    }
+  }
+}

@@ -9,4 +9,8 @@
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BwtCompression.Coders\BwtCompression.Coders.csproj" />
+  </ItemGroup>
+
 </Project>

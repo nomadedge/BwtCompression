@@ -41,12 +41,12 @@ namespace BwtCompression.Coders
 
             if (unaryModel.Bytes.Count < mtfBytes.Count)
             {
-                var encodedModel = new EncodedModel(true, isRle, bwtModel.OriginalIndex, unaryModel.Frequencies, unaryModel.Bytes);
+                var encodedModel = new EncodedModel(isRle, true, bwtModel.OriginalIndex, unaryModel.Frequencies, unaryModel.Bytes);
                 _encodedBytes = encodedModel.ToByteList();
             }
             else
             {
-                var encodedModel = new EncodedModel(false, isRle, bwtModel.OriginalIndex, null, mtfBytes);
+                var encodedModel = new EncodedModel(isRle, false, bwtModel.OriginalIndex, null, mtfBytes);
                 _encodedBytes = encodedModel.ToByteList();
             }
 

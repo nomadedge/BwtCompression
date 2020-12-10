@@ -10,17 +10,20 @@ namespace BwtCompression.Coders
     internal class EncodedModel
     {
         internal bool IsRle { get; }
+        internal bool IsUnary { get; }
         internal int OriginalIndex { get; }
         internal Dictionary<byte, int> Frequencies { get; }
         internal List<byte> Bytes { get; }
 
         internal EncodedModel(
             bool isRle,
+            bool isUnary,
             int originalIndex,
             Dictionary<byte, int> frequencies,
             List<byte> bytes)
         {
             IsRle = isRle;
+            IsUnary = isUnary;
             OriginalIndex = originalIndex;
             Frequencies = frequencies;
             Bytes = bytes;
@@ -37,6 +40,7 @@ namespace BwtCompression.Coders
                 var encodedModel = binaryFormatter.Deserialize(memoryStream) as EncodedModel;
 
                 IsRle = encodedModel.IsRle;
+                IsUnary = encodedModel.IsUnary;
                 OriginalIndex = encodedModel.OriginalIndex;
                 Frequencies = encodedModel.Frequencies;
                 Bytes = encodedModel.Bytes;

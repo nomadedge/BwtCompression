@@ -18,8 +18,9 @@ namespace BwtCompression.Coders
 
         public List<byte> Encode()
         {
-            var nextBytes = _originalBytes;
             var isRle = false;
+
+            var nextBytes = _originalBytes;
 
             var rleCoder = new RleCoder();
             var rleBytes = rleCoder.Encode(_originalBytes);
@@ -38,8 +39,16 @@ namespace BwtCompression.Coders
             var unaryCoder = new UnaryCoder();
             var unaryModel = unaryCoder.Encode(mtfBytes);
 
-            var encodedModel = new EncodedModel(isRle, bwtModel.OriginalIndex, unaryModel.Frequencies, unaryModel.Bytes);
-            _encodedBytes = encodedModel.ToByteList();
+            if (unaryModel.Bytes.Count < mtfBytes.Count)
+            {
+                var encodedModel = new EncodedModel(true, isRle, bwtModel.OriginalIndex, unaryModel.Frequencies, unaryModel.Bytes);
+                _encodedBytes = encodedModel.ToByteList();
+            }
+            else
+            {
+                var encodedModel = new EncodedModel(false, isRle, bwtModel.OriginalIndex, null, mtfBytes);
+                _encodedBytes = encodedModel.ToByteList();
+            }
 
             return _encodedBytes;
         }

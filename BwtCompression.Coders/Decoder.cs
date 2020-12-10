@@ -20,9 +20,15 @@ namespace BwtCompression.Coders
         {
             var encodedModel = new EncodedModel(_encodedBytes);
 
-            var unaryModel = new UnaryModel(encodedModel.Frequencies, encodedModel.Bytes);
-            var unaryCoder = new UnaryCoder();
-            var mtfBytes = unaryCoder.Decode(unaryModel);
+            var mtfBytes = encodedModel.Bytes;
+
+            if (encodedModel.IsUnary)
+            {
+                var unaryModel = new UnaryModel(encodedModel.Frequencies, encodedModel.Bytes);
+                var unaryCoder = new UnaryCoder();
+                mtfBytes = unaryCoder.Decode(unaryModel);
+            }
+            
 
             var mtfCoder = new MtfCoder();
             var bwtBytes = mtfCoder.Decode(mtfBytes);
